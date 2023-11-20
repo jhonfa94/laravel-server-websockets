@@ -1,0 +1,31 @@
+# Ocultamos las carpeta del proyecto para que los usuarios no puedan ver el contenido
+Options All -Indexes
+#Options +FollowSymLinks
+
+# Configuro errores que se dan
+ErrorDocument  403 /
+ErrorDocument  404 /
+
+# Protegiendo el archivo htaccess
+<Files .htaccess>
+    Require all denied
+</Files>
+
+# IMPEDIMOS EL ACCESO AL ARCHIVO composer.json
+<Files composer.json>
+    Require all denied
+</Files>
+
+# SE PREVIENE EL ACCESO LOS ARCHIVOS |json
+<FilesMatch "\.(csv|txt|md|yml|lock)$">
+    Require all denied
+</FilesMatch>
+
+# prevent folder listing
+IndexIgnore *
+
+# only .git
+RedirectMatch 404 /\.git
+
+# all dot files
+RedirectMatch 404 /\..*$
